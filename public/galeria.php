@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <title>Fotópályázat 2026 - Galéria</title>
     <style>
+        /* root css valtozok a szinpaletta es a tema beallitasahoz */
         :root {
             --primary: #4f46e5;
             --bg-color: #f3f4f6;
             --card-bg: #ffffff;
             --text-color: #1f2937;
         }
+        /* alapveto stilusok a testreszabott megjeleneshez */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-color);
@@ -18,9 +20,11 @@
             margin: 0 auto;
             padding: 2rem;
         }
+        /*a fejlec es a cimek stilusai*/
         h1, h2 {
             color: #111827;
         }
+        /*a feltoltesi urlap es a gombok stilusai*/
         .urlap {
             background: var(--card-bg);
             border: 1px solid #e5e7eb;
@@ -29,6 +33,7 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             margin-bottom: 2.5rem;
         }
+        /*a form elemek es a gombok stilusai*/
         .urlap input[type="text"], .urlap input[type="file"] {
             width: 100%;
             padding: 0.75rem;
@@ -38,6 +43,7 @@
             border-radius: 6px;
             box-sizing: border-box;
         }
+        /*a gomb stilusai es az interakcios hatasok*/
         .urlap button {
             background-color: var(--primary);
             color: white;
@@ -48,14 +54,17 @@
             cursor: pointer;
             transition: background-color 0.2s;
         }
+        /*a gomb hover hatasa*/
         .urlap button:hover {
             background-color: #4338ca;
         }
+        /*a galeria es a kepkartya stilusai*/
         .galeria {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 1.5rem;
         }
+        /*a kepkartya es a kep kontener stilusai, beleertve a hover hatast is*/
         .kep-kartya {
             background: var(--card-bg);
             border-radius: 10px;
@@ -67,10 +76,12 @@
             justify-content: space-between;
             padding: 0.75rem;
         }
+        /*a kepkartya hover hatasa*/
         .kep-kartya:hover {
             transform: translateY(-4px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
+        /*a kep kontener es a kep stilusai, beleertve az object-fit beallitasat is*/
         .kep-kontener {
             width: 100%;
             height: 180px;
@@ -81,21 +92,25 @@
             align-items: center;
             justify-content: center;
         }
+        /*a kep stilusai, beleertve az object-fit beallitasat is*/
         .kep-kontener img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
+        /*a kepkartya lab reszenek stilusai, beleertve a link stilusait is*/
         .kartya-lab {
             margin-top: 0.75rem;
             text-align: center;
         }
+        /*a link stilusai a kepkartya lab reszen belul*/
         .kartya-lab a {
             color: var(--primary);
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
         }
+        /*a link hover hatasa a kepkartya lab reszen belul*/
         .kartya-lab a:hover {
             text-decoration: underline;
         }
@@ -121,6 +136,7 @@
     <h2>Feltöltött képek</h2>
     <div class="galeria">
         <?php
+        // a tarhely mappa eleresi utja
         $tarhely = __DIR__ . '/../tarhely';
         if (is_dir($tarhely)) {
             $fajlok = scandir($tarhely);
@@ -139,6 +155,7 @@
                     echo '</div>';
                 }
             }
+            // ha nincs feltoltott kep, akkor egy uzenetet jelenitunk meg a galeria reszen
             if (!$talalat) {
                 echo '<p style="color: #6b7280; grid-column: 1 / -1;">Még nincsenek feltöltött képek.</p>';
             }
