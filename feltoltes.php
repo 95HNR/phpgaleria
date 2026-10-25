@@ -30,4 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         http_response_code(422); 
         exit('Ervenytelen kep vagy tul nagy felbontas.');
     }
+    const TARHELY = __DIR__ . '/../tarhely';
+    
+    $nev = bin2hex(random_bytes(16)) . '.' . ENGEDETT[$mime];
+    $cel = TARHELY . '/' . $nev;
+    
+    if (!move_uploaded_file($f['tmp_name'], $cel)) {
+        http_response_code(500); 
+        exit('A fajl mentese nem sikerult.');
+    }
+    chmod($cel, 0640);
 }
