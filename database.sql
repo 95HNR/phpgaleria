@@ -1,0 +1,11 @@
+CREATE TABLE kep (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    fajlnev CHAR(37) NOT NULL UNIQUE,
+    eredeti_nev VARCHAR(255) NOT NULL,
+    cim VARCHAR(100) NOT NULL,
+    mime VARCHAR(20) NOT NULL,
+    meret INT NOT NULL,
+    szelesseg INT NOT NULL,
+    magassag INT NOT NULL,
+    feltoltve TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
