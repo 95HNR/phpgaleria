@@ -54,6 +54,4 @@ function thumbnail(string $forras, string $cel, string $mime, int $szel = 320): 
     };
     $kicsi = imagescale($kep, $szel);
     imagewebp($kicsi, $cel, 80);
-    imagedestroy($kep);
-    imagedestroy($kicsi);
 }
