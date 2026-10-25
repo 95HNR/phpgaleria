@@ -40,4 +40,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit('A fajl mentese nem sikerult.');
     }
     chmod($cel, 0640);
+    thumbnail($cel, TARHELY . '/kicsi_' . $nev, $mime);
+}
+
+function thumbnail(string $forras, string $cel, string $mime, int $szel = 320): void {
+    $kep = match ($mime) {
+        'image/jpeg' => imagecreatefromjpeg($forras),
+        'image/png'  => imagecreatefrompng($forras),
+        'image/webp' => imagecreatefromwebp($forras),
+    };
+    $kicsi = imagescale($kep, $szel);
+    imagewebp($kicsi, $cel, 80);
+    imagedestroy($kep);
+    imagedestroy($kicsi);
 }
