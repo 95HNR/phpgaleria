@@ -1,5 +1,7 @@
 <?php
 const MAX_MERET = 2 * 1024 * 1024; // 2 MB
+const ENGEDETT = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
+const TARHELY = __DIR__ . '/../tarhely';
 
 if (empty($_POST) && (int)($_SERVER['CONTENT_LENGTH'] ?? 0) > 0) {
     http_response_code(413);
@@ -17,8 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         http_response_code(413); 
         exit('A fajl legfeljebb 2 MB lehet.');
     }
-    const ENGEDETT = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
-    
+
     $mime = (new finfo(FILEINFO_MIME_TYPE))->file($f['tmp_name']);
     if (!isset(ENGEDETT[$mime])) {
         http_response_code(415);
@@ -30,7 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         http_response_code(422); 
         exit('Ervenytelen kep vagy tul nagy felbontas.');
     }
-    const TARHELY = __DIR__ . '/../tarhely';
     
     $nev = bin2hex(random_bytes(16)) . '.' . ENGEDETT[$mime];
     $cel = TARHELY . '/' . $nev;
@@ -57,4 +57,3 @@ function thumbnail(string $forras, string $cel, string $mime, int $szel = 320): 
     imagedestroy($kep);
     imagedestroy($kicsi);
 }
-
