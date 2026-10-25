@@ -41,6 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     chmod($cel, 0640);
     thumbnail($cel, TARHELY . '/kicsi_' . $nev, $mime);
+
+    header('Location: /galeria.php', true, 303);
+    exit;
 }
 
 function thumbnail(string $forras, string $cel, string $mime, int $szel = 320): void {
@@ -54,3 +57,4 @@ function thumbnail(string $forras, string $cel, string $mime, int $szel = 320): 
     imagedestroy($kep);
     imagedestroy($kicsi);
 }
+
